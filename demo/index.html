@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<title>SL-Simple Library | http://omiga.org/</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta name="robots" content="all" />
+<meta name="author" content="wondger" />
+<style type="text/css">
+    li.del{color:grey;}
+    li.even{color:#F00;text-decoration:underline;}
+</style>
+</head>
+<body>
+<h1>SL-Simple Library</h1>
+<h2>util.templateParse</h2>
+<ol id="list_star">
+    <li>{{name}}来自{{country}}，今年{{age}}岁</li>
+    <li class="aaa del xxx">{{name}}来自{{country}}，今年{{age}}岁</li>
+    <li>{{name}}来自{{country}}，今年{{age}}岁</li>
+</ol>
+<button class="btn" onclick="alert(S('li').size())">S('li').length</button>
+<script src="js/sl.js" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+function init_star(){
+	var c = [
+		{
+			name:'小甜甜',
+			age:23,
+			country:'USA'
+		},
+		{
+			name:'王菲',
+			age:40,
+			country:'CHINA'
+		},
+		{
+			name:'阿妹',
+			age:35,
+			country:'TW'
+		}
+	];
+	var lis = document.getElementById('list_star').getElementsByTagName('li');
+	for(var i = 0,l = c.length; i<l; i++){
+		lis[i].innerHTML = S.templateParse(lis[i].innerHTML,c[i]);
+	}
+}
+init_star();
+function list(){
+    S('li').on('click',function(i){
+        if(i%2 == 1) this.addClass('even');
+    })
+    .each(function(i){
+        if(i==2) this.addClass('del');
+    })
+    .removeClass('del');
+}
+list();
+//]]>
+</script>
+</body>
+</html>
