@@ -83,7 +83,14 @@
         attr:function(name,value){
             return this;
         },
+        /*
+         * @note data值存储在什么地方
+         *       如何索引每个对象的data
+         */
         data:function(name,value){
+            if(!S.isUndefined(value)){
+                SL.fn.cache[name] = value;
+            }
             return this;
         },
         css:function(name,value){
@@ -107,6 +114,20 @@
             }else if(S.isString(value)){
                 this.get(0).innerHTML = value;
             }
+        },
+        empty:function(){
+            this.each(function(){
+                this.html('');
+            })
+        },
+        parent:function(selector){
+
+        },
+        sibings:function(selector){
+        },
+        next:function(selector){
+        },
+        prev:function(selector){
         },
         /*
          * @description 显示元素
@@ -295,6 +316,9 @@
         },
         isNaN:function(obj){
             return SL.lang.type(obj) === 'NaN';
+        },
+        now:function(){
+            return new Date().getTime();
         }
     };
     SL.lang.mix(S,SL.lang);
